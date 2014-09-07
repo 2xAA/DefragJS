@@ -21,6 +21,9 @@ If you choose not to autostart you can start DefragJS like so:
 var defrag.start();
 ```
 
+Here's some example code:
+http://jsfiddle.net/2xaa/9psLqehh/
+
 It's not a very accurate representation of the Windows Defragmenter, but hopefully I'll update this and make it more realistic someday.
 
 Have fun!
