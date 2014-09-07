@@ -1,7 +1,7 @@
 DefragJS
 ========
 
-A vapourware defragger for JavaScript.
+A Vaporware defragger for JavaScript.
 
 Usage
 -----
