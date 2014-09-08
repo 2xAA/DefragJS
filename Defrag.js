@@ -12,7 +12,9 @@ var Defrag = function(container, fragments, auto, callback) {
 		nextBlock = 0,
 		currentBlock = 0,
 		finished = false,
-		started = false;
+		started = false,
+        smallRunToGo = 0,
+        smallRunDone = 0;
     
     blocks.classList.add('defrag-blocks');
 	
@@ -28,12 +30,42 @@ var Defrag = function(container, fragments, auto, callback) {
 	        blocksToDefrag = fragments - nextBlock;
 	        finished = true;
 	    }
-	
-	    for (var i = nextBlock; i < nextBlock + blocksToDefrag; i++) {
-	        var block = document.getElementsByClassName('defrag-block')[i];
-	        block.classList.add('moved');
-	    }
-	    setTimeout(progress, getRandomInt(10, 1500));
+        if(getRandomInt(0,100) > 80) {
+            smallRunToGo = blocksToDefrag;
+            smallRunDone = 0;
+            smallRun();
+        } else {
+    	    for (var i = nextBlock; i < nextBlock + blocksToDefrag; i++) {
+	            var block = document.getElementsByClassName('defrag-block')[i];
+	            block.classList.add('moved');
+    	    }
+	        setTimeout(progress, getRandomInt(10, 1500));
+        }
+        
+        function smallRun() {            
+            if(smallRunToGo > smallRunDone) {
+                var block = document.getElementsByClassName('defrag-block')[nextBlock];
+                block.classList.add('moved');
+                
+                setTimeout(function() {
+                    block.classList.remove('moved');
+                    block.classList.add('inprogress');
+                    
+                    setTimeout(function() {
+                        
+                        block.classList.remove('inprogress');
+                        block.classList.add('done');
+                        
+                        nextBlock++;
+                        smallRunDone++;
+                        smallRun();
+                        
+                    }, getRandomInt(30, 100));                  
+                }, getRandomInt(20, 90));
+            } else {
+                defragGo();
+            }
+        }
 	
 	    function progress() {
 	        for (var i = nextBlock; i < nextBlock + blocksToDefrag; i++) {
