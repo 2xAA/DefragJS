@@ -18,7 +18,7 @@ var defrag = new Defrag(document.getElementById('blocks'), 1000, true, function(
 
 If you choose not to autostart you can start DefragJS like so:
 ```JavaScript
-var defrag.start();
+defrag.start();
 ```
 
 Here's some example code:
